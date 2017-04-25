@@ -1,4 +1,4 @@
-from test_runner import test_runner
+from test_runner import run_tests
 
 
 class Animal:
@@ -18,5 +18,9 @@ def test_isinstance():
     assert not isinstance(donald, Dog)
 
 
-if __name__ == 'main':
-    test_runner()
+def test_that_fails():
+    assert False
+
+
+if __name__ == '__main__':
+    run_tests()
