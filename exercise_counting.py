@@ -18,7 +18,7 @@ the number of words in a given text.
 
 def count_number_of_words(text):
     """ Counts the number of words (separated by white spaces or newlines) in a text """
-    return len(text.split())
+    pass
 
 
 """
@@ -30,7 +30,7 @@ lower case characters.
 
 
 def convert_to_lowercase(text):
-    return text.lower()
+    pass
 
 
 """
@@ -40,10 +40,7 @@ have to be removed. Implement the following function doing this.
 
 
 def remove_punctuation(text):
-    lower_case_chars = [chr(x) for x in range(ord('a'), ord('z')+1)]
-    upper_case_chars = [chr(x) for x in range(ord('A'), ord('Z')+1)]
-    allowed_characters = lower_case_chars + upper_case_chars + [' ']
-    return ''.join([c for c in text if c in allowed_characters])
+    pass
 
 
 """
@@ -56,8 +53,7 @@ from collections import Counter
 
 
 def occurrence_of_words(text):
-    single_words = text.split()
-    return dict(Counter(single_words))
+    pass
 
 
 """
@@ -70,14 +66,14 @@ Hint: a dictionary cannot be sorted, convert the dictionary to a data-structure 
 
 
 def get_most_occurring_words(count_dictionary, number=10):
-    zipped_dict = zip(count_dictionary.values(), count_dictionary.keys())
-    zipped_sorted_dict = sorted(zipped_dict, reverse=True)
-    return zipped_sorted_dict[:number]
+    pass
 
 
 """
 If you computed the most occurring words in Hamlet, you can see that the first words are stop words such as
-the, and, or. For a word analysis to be interesting we have to remove these words
+the, and, or. For a word analysis to be interesting we have to remove these words. We have already loaded you
+a list of these stop words below. Implement the function remove_forbidden_words, which removes all stop words
+from a given text.
 """
 
 # load a list of stop words
@@ -86,23 +82,7 @@ with open('data/stop_words.txt', 'r') as f:
 
 
 def remove_forbidden_words(text, forbidden):
-    splitted = text.split()
-    splitted_removed = [word for word in splitted if word not in forbidden]
-    return ' '.join(splitted_removed)
-
-
-if __name__ == '__main__':
-    # only execute this part if file is executed as a script (not if its imported by the tester)
-    # use the functions defined above to analyse the hamlet play
-    print('The Hamlet play contains: %i words' % count_number_of_words(hamlet))
-    hamlet_lower = convert_to_lowercase(hamlet)
-    hamlet_wo_punctuation = remove_punctuation(hamlet_lower)
-    occurrences_hamlet = occurrence_of_words(hamlet_wo_punctuation)
-    print('Most common words in hamlet play: %s' % get_most_occurring_words(occurrences_hamlet))
-    hamlet_wo_stop = remove_forbidden_words(hamlet_wo_punctuation, stop_words)
-    occurrences_hamlet_wo_stop = occurrence_of_words(hamlet_wo_stop)
-    print('Most common words in hamlet play without stop words: %s'
-          % get_most_occurring_words(occurrences_hamlet_wo_stop))
+    pass
 
 
 """
