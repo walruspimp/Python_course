@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-from test_runner import run_tests
-
-
-
 """
 In this exercise we will develop function to analyse the words in a text.
 As an example we will use the play Hamlet by William Shakespeare. We already
@@ -19,11 +15,10 @@ How many words is Hamlet made of? Implement the function count_number_of_words, 
 the number of words in a given text.
 """
 
+
 def count_number_of_words(text):
     """ Counts the number of words (separated by white spaces or newlines) in a text """
     return len(text.split())
-
-print('The Hamlet play contains: %i words' %count_number_of_words(hamlet))
 
 
 """
@@ -33,35 +28,37 @@ capitalization (e.g. home and Home) are not the same. Therefore we will convert 
 lower case characters.
 """
 
+
 def convert_to_lowercase(text):
     return text.lower()
 
-hamlet_lower = convert_to_lowercase(hamlet)
 
 """
 Another problem for our computations punctuation and special characters in the text (. , - etc), which
 have to be removed. Implement the following function doing this.
 """
 
+
 def remove_punctuation(text):
-    lower_case_chars =  [chr(x) for x in range(ord('a'), ord('z')+1)]
+    lower_case_chars = [chr(x) for x in range(ord('a'), ord('z')+1)]
     upper_case_chars = [chr(x) for x in range(ord('A'), ord('Z')+1)]
     allowed_characters = lower_case_chars + upper_case_chars + [' ']
     return ''.join([c for c in text if c in allowed_characters])
 
-hamlet_wo_punctuation = remove_punctuation(hamlet_lower)
 
 """
 Next we can implement the function that counts occurrence of each word in a text. The function is supposed
 to return a dictionary, in which each word is a key and the value is the number of occurrences of the word.
 """
 
+
 from collections import Counter
+
+
 def occurrence_of_words(text):
     single_words = text.split()
     return dict(Counter(single_words))
 
-occurrences_hamlet = occurrence_of_words(hamlet_wo_punctuation)
 
 """
 We would like to know what are the most common words in Hamlet. Implement a function to find  the
@@ -71,12 +68,11 @@ a list in which each entry is a tuple consisting of the number of occurrences of
 Hint: a dictionary cannot be sorted, convert the dictionary to a data-structure that can be sorted first.
 """
 
+
 def get_most_occurring_words(count_dictionary, number=10):
     zipped_dict = zip(count_dictionary.values(), count_dictionary.keys())
     zipped_sorted_dict = sorted(zipped_dict, reverse=True)
     return zipped_sorted_dict[:number]
-
-print('Most common words in hamlet play: %s' %get_most_occurring_words(occurrences_hamlet))
 
 
 """
@@ -94,19 +90,26 @@ def remove_forbidden_words(text, forbidden):
     splitted_removed = [word for word in splitted if word not in forbidden]
     return ' '.join(splitted_removed)
 
-hamlet_wo_stop = remove_forbidden_words(hamlet_wo_punctuation, stop_words)
-occurrences_hamlet_wo_stop = occurrence_of_words(hamlet_wo_stop)
-print('Most common words in hamlet play without stop words: %s' %get_most_occurring_words(occurrences_hamlet_wo_stop))
 
-
-
-
+if __name__ == '__main__':
+    # only execute this part if file is executed as a script (not if its imported by the tester)
+    # use the functions defined above to analyse the hamlet play
+    print('The Hamlet play contains: %i words' % count_number_of_words(hamlet))
+    hamlet_lower = convert_to_lowercase(hamlet)
+    hamlet_wo_punctuation = remove_punctuation(hamlet_lower)
+    occurrences_hamlet = occurrence_of_words(hamlet_wo_punctuation)
+    print('Most common words in hamlet play: %s' % get_most_occurring_words(occurrences_hamlet))
+    hamlet_wo_stop = remove_forbidden_words(hamlet_wo_punctuation, stop_words)
+    occurrences_hamlet_wo_stop = occurrence_of_words(hamlet_wo_stop)
+    print('Most common words in hamlet play without stop words: %s'
+          % get_most_occurring_words(occurrences_hamlet_wo_stop))
 
 
 """
 From here on unit tests.
 Do not modify this code!
 """
+
 
 def test_count_number_of_words():
     txt1 = 'Long live the king!'
@@ -123,6 +126,7 @@ def test_convert_to_lowercase():
     assert convert_to_lowercase(txt1) == 'capital'
     assert convert_to_lowercase(txt2) == 'capital'
 
+
 def test_remove_punctuation():
     txt1 = 'Long live the king!'
     txt2 = 'text without Punctuation'
@@ -130,6 +134,7 @@ def test_remove_punctuation():
     assert remove_punctuation(txt1) == 'Long live the king'
     assert remove_punctuation(txt2) == 'text without Punctuation'
     assert remove_punctuation(txt3) == ''
+
 
 def test_occurrence_of_words():
     txt1 = 'stay speak speak i charge thee speak \n\nexit ghost'
@@ -139,12 +144,14 @@ def test_occurrence_of_words():
     assert occurrence_of_words(txt2) == {}
     assert occurrence_of_words(txt3) == {'the': 1, 'it': 2, 'heard': 1, 'draws': 1, 'season': 1, 'indeed': 1, 'near': 1, 'then': 1, 'not': 1, 'i': 1}
 
+
 def test_get_most_occurring_words():
      d1 = {'speak': 1, 'exit': 3, 'ghost': 2}
      d2 = {'the': 1, 'indeed': 1, 'near': 2, 'not':3}
      assert get_most_occurring_words(d1, number=3) ==  [(3, 'exit'), (2, 'ghost'), (1, 'speak')]
      assert get_most_occurring_words(d2, number=4) == [(3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
      assert get_most_occurring_words(d2, number=10) == [(3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
+
 
 def test_remove_forbidden_words():
     forbidden = ['and', 'to', 'where']
@@ -157,4 +164,5 @@ def test_remove_forbidden_words():
 
 
 if __name__ == '__main__':
+    from test_runner import run_tests
     run_tests()
