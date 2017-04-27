@@ -49,9 +49,6 @@ to return a dictionary, in which each word is a key and the value is the number 
 """
 
 
-from collections import Counter
-
-
 def occurrence_of_words(text):
     pass
 
