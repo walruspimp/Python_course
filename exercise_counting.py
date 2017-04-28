@@ -117,17 +117,22 @@ def test_occurrence_of_words():
     txt1 = 'stay speak speak i charge thee speak \n\nexit ghost'
     txt2 = ''
     txt3 = 'indeed i heard it not then it draws near the season'
-    assert occurrence_of_words(txt1) == {'speak': 3, 'exit': 1, 'i': 1, 'charge': 1, 'stay': 1, 'thee': 1, 'ghost': 1}
+    assert occurrence_of_words(txt1) == {
+        'speak': 3, 'exit': 1, 'i': 1, 'charge': 1, 'stay': 1, 'thee': 1, 'ghost': 1}
     assert occurrence_of_words(txt2) == {}
-    assert occurrence_of_words(txt3) == {'the': 1, 'it': 2, 'heard': 1, 'draws': 1, 'season': 1, 'indeed': 1, 'near': 1, 'then': 1, 'not': 1, 'i': 1}
+    assert occurrence_of_words(txt3) == {'the': 1, 'it': 2, 'heard': 1, 'draws': 1,
+                                         'season': 1, 'indeed': 1, 'near': 1, 'then': 1, 'not': 1, 'i': 1}
 
 
 def test_get_most_occurring_words():
-     d1 = {'speak': 1, 'exit': 3, 'ghost': 2}
-     d2 = {'the': 1, 'indeed': 1, 'near': 2, 'not':3}
-     assert get_most_occurring_words(d1, number=3) ==  [(3, 'exit'), (2, 'ghost'), (1, 'speak')]
-     assert get_most_occurring_words(d2, number=4) == [(3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
-     assert get_most_occurring_words(d2, number=10) == [(3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
+    d1 = {'speak': 1, 'exit': 3, 'ghost': 2}
+    d2 = {'the': 1, 'indeed': 1, 'near': 2, 'not': 3}
+    assert get_most_occurring_words(d1, number=3) == [
+        (3, 'exit'), (2, 'ghost'), (1, 'speak')]
+    assert get_most_occurring_words(d2, number=4) == [(
+        3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
+    assert get_most_occurring_words(d2, number=10) == [(
+        3, 'not'), (2, 'near'), (1, 'the'), (1, 'indeed')]
 
 
 def test_remove_forbidden_words():

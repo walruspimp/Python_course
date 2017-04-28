@@ -1,62 +1,80 @@
-from test_runner import run_tests
+#!/usr/bin/env python
+"""
+In this exercise we will create a number of classes and apply some elementary
+object-oriented programming.
 
-# CLASSES
-#
-# Implement the following classes describing some of the actors in an elementary
-# video game. 
-# All actors have a property "strength". Strength is a number that can be
-# increased by x by calling the method "increase_strength(x)", resp. "strength" is decreased
-# by x by calling the method "decrease_strength(x)". If the strength drops below
-# zero, it should remain zero.
-#
-# The property "is_alive" should start out True, and become False once strength
-# reaches zero. Contrary to popular opinion, Zombies and Vampires should
-# start out as alive.
-#
-# All actors will contain the method "fight()". Two actors x and y can fight eachother by
-# calling "x.fight(y)". The one with the highest strength wins, the other dies. The winner is
-# damaged however, and gets its strength decreased by the strength of the opponent.
-# 
-# All actors have a "kills" property which increases by one when the actor wins a fight.
-# 
-# 
-# Class Hero has an special property "magic". Hero's "strength" can increase only if "magic" is 
-# above zero. x increase in "strength" causes x decrease in "magic".
-#
-# Class Vampire will increase its property "strength" only if it survives after a fight.
-# "strength" of Vampire will increase by x, where x is half the "strength" of the opponent.
-#
-# Class Zombie will increase its "strength" by x at the beginning of every fight, where x is a
-# randomly generated number between 1 and 10.  
+Implement the following classes describing some of the actors in an elementary
+video game.
+
+All actors have a property "strength". Strength is a number that can be
+increased by x by calling the method "increase_strength(x)", resp. "strength" is
+decreased by x by calling the method "decrease_strength(x)". If the strength drops
+below zero, it should remain zero.
+
+The property "is_alive" should start out True, and become False once strength
+reaches zero. Contrary to popular opinion, Zombies and Vampires should
+start out as alive.
+
+All actors will contain the method "fight()". Two actors x and y can fight
+eachother by calling "x.fight(y)". The one with the highest strength wins,
+the other dies. The winner is damaged however, and gets its strength decreased
+by the strength of the opponent.
+
+All actors have a "kills" property which increases by one when the actor wins a
+fight.
+
+Class Hero has an special property "magic". Hero's "strength" can increase only
+if "magic" is above zero. x increase in "strength" causes x decrease in "magic".
+
+Class Vampire will increase its property "strength" only if it survives after a
+fight. The "strength" of Vampire will increase by x, where x is half the
+"strength" of the opponent.
+
+Class Zombie will increase its "strength" by x at the beginning of every fight,
+where x is a randomly generated number between 1 and 10.
+"""
+
+
+"""
+First of all think about the inheritance hierarchy: what properties are shared by
+what classes? We've provided you with the names of the classes that are required
+to solve the problem, but it's up to you to implement them and lay out their
+inheritance hierarchy.
+"""
 
 
 class Actor:
-    def __init__(self, strenght)    
-        pass
-
-    def increase_strength(self, x):
-        pass
-	
-    def decrease_strength(self, x):
-        pass
-	
-    def fight(self, opponent):
-        pass
-
-class Hero(Actor):
+    """
+    This is supposed to be the most general class, at the top of the hierarchy:
+    everything that shared between all actors can be put here.
+    """
     pass
 
 
-class Enemy(Actor):
+class Hero:
     pass
 
 
-class Zombie(Enemy):
+class Enemy:
     pass
 
 
-class Vampire(Enemy):
+class Zombie:
+    """
+    Remember that Zombies increase their strength randomly at the beginning
+    of each fight. How to generate a random number?
+    """
     pass
+
+
+class Vampire:
+    pass
+
+
+"""
+From here on unit tests.
+Do not modify this code!
+"""
 
 
 def test_hero_strength():
@@ -68,9 +86,9 @@ def test_hero_strength():
     hero.increase_strength(50)
     assert hero.strength == 150
     assert hero.is_alive
-    
-    assert hero.increase_strength(50)==False
-    
+
+    assert hero.increase_strength(50) == False
+
     hero.decrease_strength(149)
     assert hero.strength == 1
     assert hero.is_alive
@@ -119,4 +137,5 @@ def test_hero_loses_against_zombie():
 
 
 if __name__ == '__main__':
+    from test_runner import run_tests
     run_tests()
