@@ -15,8 +15,8 @@ The property "is_alive" should start out True, and become False once strength
 reaches zero. Contrary to popular opinion, Zombies and Vampires should
 start out as alive.
 
-All actors will contain the method "fight()". Two actors x and y can fight
-eachother by calling "x.fight(y)". The one with the highest strength wins,
+All actors will contain the method "fight()". Actor x can start a fight with
+Actor y by calling "x.fight(y)". The one with the highest strength wins,
 the other dies. The winner is damaged however, and gets its strength decreased
 by the strength of the opponent.
 
@@ -27,11 +27,11 @@ Class Hero has an special property "magic". Hero's "strength" can increase only
 if "magic" is above zero. x increase in "strength" causes x decrease in "magic".
 
 Class Vampire will increase its property "strength" only if it survives after a
-fight. The "strength" of Vampire will increase by x, where x is half the
-"strength" of the opponent.
+fight _it started itself_. The "strength" of Vampire will increase by x, where x
+is half the "strength" of the opponent.
 
-Class Zombie will increase its "strength" by x at the beginning of every fight,
-where x is a randomly generated number between 1 and 10.
+Class Zombie will increase its "strength" by x at the beginning of every fight
+_it starts itself_, where x is a randomly generated number between 1 and 10.
 """
 
 
@@ -52,6 +52,9 @@ class Actor:
 
 
 class Hero:
+    """
+    Heroes start out with 100 strength and 50 magic.
+    """
     pass
 
 
@@ -61,6 +64,7 @@ class Enemy:
 
 class Zombie:
     """
+    Zombies start out with 150 strength.
     Remember that Zombies increase their strength randomly at the beginning
     of each fight. How to generate a random number?
     """
@@ -68,6 +72,11 @@ class Zombie:
 
 
 class Vampire:
+    """
+    Vampires start out with 70 strength.
+    Remember that when a Vampire wins a fight it starts, it obtains half of the
+    strength of the enemy it has beaten.
+    """
     pass
 
 
@@ -87,7 +96,7 @@ def test_hero_strength():
     assert hero.strength == 150
     assert hero.is_alive
 
-    assert hero.increase_strength(50) == False
+    assert hero.magic == 0
 
     hero.decrease_strength(149)
     assert hero.strength == 1
@@ -107,14 +116,14 @@ def test_hero_fights_vs_vampires():
     assert first_vampire.strength == 70
     assert first_vampire.is_alive
 
-    hero.fight(first_vampire)
+    first_vampire.fight(hero)
     assert hero.strength == 30
     assert hero.is_alive
     assert hero.kills == 1
     assert not first_vampire.is_alive
 
     second_vampire = Vampire()
-    hero.fight(second_vampire)
+    second_vampire.fight(hero)
 
     assert hero.strength == 0
     assert not hero.is_alive
@@ -127,13 +136,15 @@ def test_hero_fights_vs_vampires():
 def test_hero_loses_against_zombie():
     hero = Hero()
     zombie = Zombie()
-    assert zombie.strength == 100
+    assert zombie.strength == 150
 
-    hero.fight(zombie)
+    zombie.fight(hero)
     assert not hero.is_alive
     assert hero.kills == 0
     assert zombie.is_alive
     assert zombie.kills == 1
+    assert zombie.strength > 50
+    assert zombie.strength < 61
 
 
 if __name__ == '__main__':
