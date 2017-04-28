@@ -14,5 +14,7 @@ def run_tests():
         try:
             exec('mod.{}()'.format(test_function))
             print('SUCCESS')
-        except AssertionError:
+        except AssertionError as err:
             print('FAIL')
+            if err.args:
+                print('First failing assertion: {}'.format(err))
