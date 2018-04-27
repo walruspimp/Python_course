@@ -1,21 +1,21 @@
 solution_student = []
 
-# Assigment 1:
+# Assignment 01:
 # x = [1,2]
 # y = [1,2]
 # x == y ?? True or False ?
 
-# Assigment 2:
+# Assignment 02:
 # x = [1,2]
 # y = [1,2]
 # x is y ?? True or False ?
 
-# Assigment 3:
+# Assignment 03:
 # x = [1,2]
 # y = x
 # x == y ?? True or False ?
 
-# Assigment 4:
+# Assignment 04:
 # x = [1,2]
 # y = x
 # x is y ?? True or False ?
