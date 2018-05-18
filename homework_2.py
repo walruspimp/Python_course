@@ -22,4 +22,4 @@ if __name__ == "__main__":
     for user_choice in possibilities:
         for computer_choice in possibilities:
             if user_choice == computer_choice:
-                assert rock_paper_scissors(user_choice, computer_choice) is 'tied game'
+                assert rock_paper_scissors(user_choice, computer_choice) == 'tied game'
