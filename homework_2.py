@@ -10,11 +10,30 @@
 def rock_paper_scissors(user_input, computer_input):
     if user_input is 'rock' and computer_input is 'paper':
         return 'computer wins'
+    elif user_input is 'rock' and computer_input is 'scissors':
+        return 'you win'
+    elif user_input is 'rock' and computer_input is 'rock':
+        return 'tied game'
+    elif user_input is 'paper' and computer_input is 'paper':
+        return 'tied game'
+    elif user_input is 'paper' and computer_input is 'scissors':
+        return 'computer wins'
+    elif user_input is 'paper' and computer_input is 'rock':
+        return 'you win'
+    elif user_input is 'scissors' and computer_input is 'paper':
+        return 'you win'
+    elif user_input is 'scissors' and computer_input is 'scissors':
+        return 'tied game'
+    elif user_input is 'scissors' and computer_input is 'rock':
+        return 'computer wins'
 
 
+def rock_paper_scissors_2(user_input, computer_input):
+    rules = {'rock': {'paper': 'computer wins', 'scissors': 'you win', 'rock': 'tied game'},
+                      'paper': {'rock': 'you win', 'scissors': 'computer wins', 'paper': 'tied game'},
+                      'scissors': {'rock': 'computer wins', 'paper': 'you win', 'scissors': 'tied game'}}
 
-
-
+    return rules[user_input][computer_input]
 
 
 if __name__ == "__main__":
