@@ -1,11 +1,8 @@
-import time
-
 class RockPaperScissors:
     """
     Implementation of the game Rock, Paper, Scissors
     """
     def __init__(self):
-        print('meep')
         pass
 
     def computer_choice(self):
