@@ -1,6 +1,9 @@
 ##############################################################################
 # Taken from:                                                                #
 # https://scipython.com/blog/simulating-the-belousov-zhabotinsky-reaction/   #
+#                                                                            #
+# The real system:                                                           #
+# https://www.youtube.com/watch?v=PpyKSRo8Iec                                #
 ##############################################################################
 
 import numpy as np
